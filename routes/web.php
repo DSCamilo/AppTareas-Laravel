@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TareasController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/saludo', function () {
+Route::get('/tareas', function () {
     return view('tareas.index');
 });
+
+Route::post('/tareas', [TareasController::class, 'store'])->name('todos');
 
 
 Route::get('/dashboard', function () {
