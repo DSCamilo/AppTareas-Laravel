@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TareasController;
+use App\Http\Controllers\CategoriesController;
 
 
 /*
@@ -24,7 +25,15 @@ Route::get('/tareas', function () {
     return view('tareas.index');
 });
 
+Route::get('/tareas', [TareasController::class, 'index'])->name('todos');
+
 Route::post('/tareas', [TareasController::class, 'store'])->name('todos');
+
+Route::get('/tareas/{id}', [TareasController::class, 'show'])->name('tareas-edit');
+Route::patch('/tareas/{id}', [TareasController::class, 'update'])->name('tareas-update');
+Route::delete('/tareas/{id}', [TareasController::class, 'destroy'])->name('tareas-destroy');
+
+Route::resource('categories', CategoriesController::class);
 
 
 Route::get('/dashboard', function () {

@@ -32,4 +32,36 @@ class TareasController extends Controller
         // Redireccionar con mensaje de éxito
         return redirect()->route('todos')->with('success', 'Tarea creada correctamente');
     }
+
+    public function index(){
+
+        $tareas = Tarea::all();
+
+        return view('tareas.index', ['tareas' => $tareas]);
+    }
+
+    public function show($id)
+{
+        $tarea = Tarea::find($id); // Ahora la variable se llama $tarea
+        return view('tareas.show', ['tarea' => $tarea]); // Se usa la misma variable
+}
+
+    public function update(Request $request, $id){
+        $tarea = Tarea::find($id);
+        $tarea->title = $request->title;
+        -/*dd($tarea);*/
+        $tarea->save();
+        //return view('tareas.index', ['success' => 'Tarea actualizada']);
+        return redirect()->route('todos')->with('success', 'Tarea actualizada correctamente');
+    }
+
+    public function destroy($id){
+        $tarea = Tarea::find($id);
+        $tarea->delete();
+        return redirect()->route('todos')->with('success', 'Tarea eliminada correctamente');
+    }
+
+    
+
+    
 }
